@@ -61,6 +61,16 @@
                 Please enter password.
               </div>
             </div>
+            <div
+              class="alert alert-danger d-flex alert-dismissible fade show alert-container"
+              role="alert"
+              *ngIf="error"
+            >
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span class="error-content">{{
+                getErrorMessage(error.error.message)
+              }}</span>
+            </div>
 
             <div class="d-grid mb-2">
               <button

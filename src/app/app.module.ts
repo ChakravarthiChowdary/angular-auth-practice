@@ -12,15 +12,25 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { AuthGuardService } from './services/authGuard.service';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
     path: 'authsignin',
     component: SigninComponent,
+    canDeactivate: [AuthGuardService],
   },
   {
     path: 'authsignup',
     component: RegisterComponent,
+    canDeactivate: [AuthGuardService],
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuardService],
   },
 ];
 
@@ -31,6 +41,7 @@ const routes: Routes = [
     FooterComponent,
     RegisterComponent,
     SigninComponent,
+    HomeComponent,
   ],
   imports: [
     FormsModule,
@@ -42,7 +53,7 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
